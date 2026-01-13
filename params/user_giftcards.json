@@ -1,0 +1,16 @@
+[
+  {
+    "storeId": "unimarc",
+    "storeName": "Unimarc",
+    "amountCLP": 5000,
+    "code": "UNI-5K-ABCD1234",
+    "issuedAt": "2025-12-01T10:00:00.000Z"
+  },
+  {
+    "storeId": "falabella",
+    "storeName": "Falabella",
+    "amountCLP": 10000,
+    "code": "FALA-10K-XYZ9876",
+    "issuedAt": "2025-12-18T15:30:00.000Z"
+  }
+]

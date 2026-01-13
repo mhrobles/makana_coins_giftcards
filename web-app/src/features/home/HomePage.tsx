@@ -1,0 +1,45 @@
+import Section from '../../components/ui/Section';
+import { Title, Subtitle } from '../../components/ui/Title';
+import Card from '../../components/ui/Card';
+import Row from '../../components/ui/Row';
+import Button from '../../components/ui/Button';
+import { getExploreTags, getSuggestedRoutines } from '../../services/home';
+import { formatMinutes } from '../../utils/format';
+import { Link } from 'react-router-dom';
+
+export default function HomePage() {
+  const routines = getSuggestedRoutines();
+  const tags = getExploreTags();
+
+  return (
+    <main className="main">
+      <Section>
+        <Title>Hola Carlos</Title>
+        <Card style={{marginTop:12}}>
+          <div className="banner">Revisa el desafío de este mes!</div>
+          <div style={{marginTop:12}}>
+            <Link to="/coins"><Button>Ver Makana Coins</Button></Link>
+          </div>
+        </Card>
+
+        <Subtitle>Rutinas pensadas para ti</Subtitle>
+        <Row>
+          {routines.map(r => (
+            <Card key={r.id}>
+              <Subtitle>{r.title}</Subtitle>
+              <div className="muted">Sesión de {formatMinutes(r.durationMin)}</div>
+              <Button>Empezar</Button>
+            </Card>
+          ))}
+        </Row>
+
+        <Card style={{marginTop:24}}>
+          <Subtitle>Prueba algo diferente</Subtitle>
+          <Row>
+            {tags.map(t => <Button key={t}>{t}</Button>)}
+          </Row>
+        </Card>
+      </Section>
+    </main>
+  );
+}

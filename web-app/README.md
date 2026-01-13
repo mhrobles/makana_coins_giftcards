@@ -1,6 +1,6 @@
-# Makana Web App (mínimos)
+# Makana Web App
 
-Pequeña SPA hecha con React + TypeScript + Vite para cumplir los requerimientos mínimos del desafío: vistas de Inicio, Ranking y Perfil con datos mock y estilos simples.
+SPA en React + TypeScript + Vite organizada según principios de Clean Code y programación funcional.
 
 ## Ejecutar
 
@@ -10,16 +10,28 @@ npm install
 npm run dev
 ```
 
-Abre el enlace que muestra Vite y navega con la barra superior.
+## Arquitectura limpia (feature-first)
 
-## Estructura
+- `src/app` (no imprescindible por ahora): inicialización, providers y router.
+- `src/components/`:
+	- `Header.tsx`: navegación.
+	- `ui/`: primitivas puras y reutilizables (`Card`, `Button`, `Badge`, `Row`, `Section`, `Title`).
+- `src/features/`:
+	- `home/HomePage.tsx`
+	- `ranking/RankingPage.tsx`
+	- `profile/ProfilePage.tsx`
+- `src/services/`: funciones puras que proveen datos mock (sin efectos).
+- `src/types/`: tipos de dominio (`LeaderEntry`, `ProfileStats`, etc.).
+- `src/utils/`: utilidades puras de formato y ordenamiento.
 
-- `src/components/Header.tsx`: navegación entre vistas.
-- `src/pages/Home.tsx`: saludo, banner, rutinas y acciones.
-- `src/pages/Ranking.tsx`: posición del usuario y Top 10.
-- `src/pages/Perfil.tsx`: estadísticas, información personal y plan.
+### Principios aplicados
+
+- Componentes puros con props explícitas y sin efectos secundarios.
+- Separación de responsabilidades: UI, lógica de dominio y acceso a datos.
+- Utilidades y tipos compartidos centralizados.
+- Importaciones claras y rutas por feature.
 
 ## Notas
 
-- Los datos son estáticos para la entrega mínima.
-- Estilos en `src/components/header.css` y `src/index.css` con enfoque responsive.
+- Los datos son mock y deterministas para mantener pureza funcional.
+- Estilos globales en `src/components/header.css` y `src/index.css`.

@@ -1,0 +1,40 @@
+{
+  "stores": [
+    {
+      "id": "unimarc",
+      "name": "Unimarc",
+      "denominations": [
+        { "amountCLP": 5000, "costCoins": 50 },
+        { "amountCLP": 10000, "costCoins": 100 },
+        { "amountCLP": 20000, "costCoins": 200 }
+      ]
+    },
+    {
+      "id": "paris",
+      "name": "Paris",
+      "denominations": [
+        { "amountCLP": 5000, "costCoins": 55 },
+        { "amountCLP": 10000, "costCoins": 110 },
+        { "amountCLP": 20000, "costCoins": 220 }
+      ]
+    },
+    {
+      "id": "falabella",
+      "name": "Falabella",
+      "denominations": [
+        { "amountCLP": 5000, "costCoins": 60 },
+        { "amountCLP": 10000, "costCoins": 120 },
+        { "amountCLP": 20000, "costCoins": 240 }
+      ]
+    },
+    {
+      "id": "hugoboss",
+      "name": "Hugo Boss",
+      "denominations": [
+        { "amountCLP": 10000, "costCoins": 140 },
+        { "amountCLP": 20000, "costCoins": 260 },
+        { "amountCLP": 50000, "costCoins": 600 }
+      ]
+    }
+  ]
+}

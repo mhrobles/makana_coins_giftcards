@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../ui/widgets.dart';
+import 'coins_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -17,6 +18,14 @@ class HomePage extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           mkBanner('Revisa el desafío de este mes!'),
+          const SizedBox(height: 12),
+          FilledButton(
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const CoinsPage()),
+            ),
+            child: const Text('Ver Makana Coins'),
+          ),
           const SizedBox(height: 24),
           const Text(
             'Rutinas pensadas para ti',
