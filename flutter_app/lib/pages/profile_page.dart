@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../ui/widgets.dart';
+import 'coins_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -10,6 +11,15 @@ class ProfilePage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Entry point to Coins
+          FilledButton(
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const CoinsPage()),
+            ),
+            child: const Text('Mis Coins'),
+          ),
+          const SizedBox(height: 12),
           mkCard(
             child: GridView.count(
               physics: const NeverScrollableScrollPhysics(),

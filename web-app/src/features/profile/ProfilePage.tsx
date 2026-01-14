@@ -4,6 +4,8 @@ import Card from '../../components/ui/Card';
 import Badge from '../../components/ui/Badge';
 import { getPersonalInfo, getPlanPriorities, getProfileStats } from '../../services/profile';
 import { formatMinutes, formatPercent } from '../../utils/format';
+import Button from '../../components/ui/Button';
+import { Link } from 'react-router-dom';
 
 export default function ProfilePage(){
   const stats = getProfileStats();
@@ -14,6 +16,9 @@ export default function ProfilePage(){
     <main className="main">
       <Section>
         <Title>Mi Perfil</Title>
+        <div style={{margin:'12px 0'}}>
+          <Link to="/coins"><Button>Mis Coins</Button></Link>
+        </div>
 
         <Card>
           <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(140px,1fr))', gap:12}}>

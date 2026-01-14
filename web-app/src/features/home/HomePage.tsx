@@ -5,7 +5,6 @@ import Row from '../../components/ui/Row';
 import Button from '../../components/ui/Button';
 import { getExploreTags, getSuggestedRoutines } from '../../services/home';
 import { formatMinutes } from '../../utils/format';
-import { Link } from 'react-router-dom';
 
 export default function HomePage() {
   const routines = getSuggestedRoutines();
@@ -17,9 +16,6 @@ export default function HomePage() {
         <Title>Hola Carlos</Title>
         <Card style={{marginTop:12}}>
           <div className="banner">Revisa el desafío de este mes!</div>
-          <div style={{marginTop:12}}>
-            <Link to="/coins"><Button>Ver Makana Coins</Button></Link>
-          </div>
         </Card>
 
         <Subtitle>Rutinas pensadas para ti</Subtitle>
