@@ -5,8 +5,15 @@ import Button from '../../components/ui/Button';
 import { Link } from 'react-router-dom';
 import { getCoinsInfo } from '../../services/params';
 
+import { useState, useEffect } from 'react';
+
 export default function CoinsPage(){
-  const info = getCoinsInfo();
+  const [info, setInfo] = useState(getCoinsInfo());
+  useEffect(() => {
+    const handler = () => setInfo(getCoinsInfo());
+    window.addEventListener('storage', handler);
+    return () => window.removeEventListener('storage', handler);
+  }, []);
   return (
     <main className="main">
       <Section>

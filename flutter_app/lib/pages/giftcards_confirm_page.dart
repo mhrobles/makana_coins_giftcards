@@ -32,8 +32,13 @@ class _GiftcardsConfirmPageState extends State<GiftcardsConfirmPage> {
       code: '${widget.storeId.toUpperCase()}-${widget.amountCLP}-${DateTime.now().millisecondsSinceEpoch.toString().substring(6)}',
       issuedAt: DateTime.now(),
     );
-    await appendGiftcardLocal(item);
-    setState(() => _confirmed = true);
+    await appendGiftcardLocal(item, costCoins: widget.costCoins);
+    // Actualizar balance en UI
+    final info = await getCoinsInfo();
+    setState(() {
+      _confirmed = true;
+      _balance = info.balance;
+    });
   }
 
   @override

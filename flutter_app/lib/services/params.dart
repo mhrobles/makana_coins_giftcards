@@ -1,3 +1,31 @@
+const _coinsKey = 'mk_coins_balance';
+// Modificado: getCoinsInfo ahora usa SharedPreferences para el balance
+Future<CoinsInfo> getCoinsInfo() async {
+  final prefs = await SharedPreferences.getInstance();
+  final stored = prefs.getInt(_coinsKey);
+  Map<String, dynamic> map;
+  if (stored != null) {
+    final fallback = jsonDecode(_coinsJson) as Map<String, dynamic>;
+    map = {
+      'balance': stored,
+      'explanation': fallback['explanation'],
+    };
+  } else {
+    try {
+      if (kIsWeb) {
+        map = jsonDecode(_coinsJson) as Map<String, dynamic>;
+      } else {
+        final file = File(p.join(_paramsDir(), 'coins.json'));
+        final contents = await file.readAsString();
+        map = jsonDecode(contents) as Map<String, dynamic>;
+      }
+    } catch (_) {
+      map = jsonDecode(_coinsJson) as Map<String, dynamic>;
+    }
+    await prefs.setInt(_coinsKey, map['balance'] as int);
+  }
+  return CoinsInfo.fromJson(map);
+}
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
@@ -75,15 +103,21 @@ Future<List<GiftcardItem>> getUserGiftcards() async {
   return all;
 }
 
-Future<void> appendGiftcardLocal(GiftcardItem item) async {
+Future<void> appendGiftcardLocal(GiftcardItem item, {int? costCoins}) async {
   final prefs = await SharedPreferences.getInstance();
   final extras = prefs.getStringList(_extraKey) ?? [];
   extras.insert(0, jsonEncode(item.toJson()));
   await prefs.setStringList(_extraKey, extras);
+  // Si se pasa costCoins, descuéntalo del balance
+  if (costCoins != null && costCoins > 0) {
+    final current = prefs.getInt(_coinsKey) ?? 600;
+    final updated = (current - costCoins).clamp(0, 1000000);
+    await prefs.setInt(_coinsKey, updated);
+  }
 }
 
 // Web fallbacks (mirror of params JSON)
-const _coinsJson = '{"balance":180,"explanation":"Tus Makana Coins se generan por cumplimiento y participación. Puedes canjearlos por giftcards de tiendas asociadas."}';
+const _coinsJson = '{"balance":600,"explanation":"Tus Makana Coins se generan por cumplimiento y participación. Puedes canjearlos por giftcards de tiendas asociadas."}';
 
 const _catalogJson = '{"stores":[{"id":"unimarc","name":"Unimarc","denominations":[{"amountCLP":5000,"costCoins":50},{"amountCLP":10000,"costCoins":100},{"amountCLP":20000,"costCoins":200}]},{"id":"paris","name":"Paris","denominations":[{"amountCLP":5000,"costCoins":55},{"amountCLP":10000,"costCoins":110},{"amountCLP":20000,"costCoins":220}]},{"id":"falabella","name":"Falabella","denominations":[{"amountCLP":5000,"costCoins":60},{"amountCLP":10000,"costCoins":120},{"amountCLP":20000,"costCoins":240}]},{"id":"hugoboss","name":"Hugo Boss","denominations":[{"amountCLP":10000,"costCoins":140},{"amountCLP":20000,"costCoins":260},{"amountCLP":50000,"costCoins":600}]}]}';
 

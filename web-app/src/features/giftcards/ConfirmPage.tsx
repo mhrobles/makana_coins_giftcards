@@ -27,8 +27,10 @@ export default function ConfirmPage(){
       amountCLP: sel.amountCLP,
       code: `${sel.storeId.toUpperCase()}-${sel.amountCLP}-` + Math.random().toString(36).slice(2,10).toUpperCase(),
       issuedAt: new Date().toISOString(),
-    });
+    }, sel.costCoins);
     setConfirmed(true);
+    // Opcional: forzar recarga para mostrar saldo actualizado
+    setTimeout(() => window.location.reload(), 500);
   };
 
   const canAfford = info.balance >= sel.costCoins;
