@@ -33,7 +33,6 @@ class _GiftcardsConfirmPageState extends State<GiftcardsConfirmPage> {
       issuedAt: DateTime.now(),
     );
     await appendGiftcardLocal(item, costCoins: widget.costCoins);
-    // Actualizar balance en UI
     final info = await getCoinsInfo();
     setState(() {
       _confirmed = true;

@@ -23,8 +23,6 @@ class _MyGiftcardsPageState extends State<MyGiftcardsPage> {
   }
 
   Future<void> _copy(String code) async {
-    // In real app, use Clipboard.setData
-    // For simplicity here, just show a snackbar
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Código copiado: $code')));
   }

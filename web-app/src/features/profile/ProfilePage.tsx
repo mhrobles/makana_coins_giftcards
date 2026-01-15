@@ -2,14 +2,14 @@ import Section from '../../components/ui/Section';
 import { Title, Subtitle } from '../../components/ui/Title';
 import Card from '../../components/ui/Card';
 import Badge from '../../components/ui/Badge';
-import { getPersonalInfo, getPlanPriorities, getProfileStats } from '../../services/profile';
+import { getPlanPriorities } from '../../services/profile';
+import { getUserProfile } from '../../services/user';
 import { formatMinutes, formatPercent } from '../../utils/format';
 import Button from '../../components/ui/Button';
 import { Link } from 'react-router-dom';
 
 export default function ProfilePage(){
-  const stats = getProfileStats();
-  const personal = getPersonalInfo();
+  const user = getUserProfile();
   const priorities = getPlanPriorities();
 
   return (
@@ -24,15 +24,15 @@ export default function ProfilePage(){
           <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(140px,1fr))', gap:12}}>
             <div>
               <div className="muted">Cumplimiento semanal</div>
-              <div style={{fontSize:24, fontWeight:700}}>{formatPercent(stats.weeklyCompliancePct)}</div>
+              <div style={{fontSize:24, fontWeight:700}}>{formatPercent(user.weeklyCompliancePct)}</div>
             </div>
             <div>
               <div className="muted">Zonas tratadas</div>
-              <div style={{fontSize:24, fontWeight:700}}>{stats.zonesTreated}</div>
+              <div style={{fontSize:24, fontWeight:700}}>{user.zonesTreated}</div>
             </div>
             <div>
               <div className="muted">Tiempo total</div>
-              <div style={{fontSize:24, fontWeight:700}}>{formatMinutes(stats.totalMinutes)}</div>
+              <div style={{fontSize:24, fontWeight:700}}>{formatMinutes(user.totalMinutes)}</div>
             </div>
           </div>
         </Card>
@@ -40,11 +40,11 @@ export default function ProfilePage(){
         <Card style={{marginTop:12}}>
           <Subtitle>Información Personal</Subtitle>
           <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(160px,1fr))', gap:10, marginTop:10}}>
-            <Badge>{personal.id}</Badge>
-            <Badge>{personal.phone}</Badge>
-            <Badge>{personal.weightKg.toFixed(1)} kg</Badge>
-            <Badge>{personal.heightM.toFixed(2)} m</Badge>
-            <Badge>{personal.gender}</Badge>
+            <Badge>{user.id}</Badge>
+            <Badge>{user.phone}</Badge>
+            <Badge>{user.weightKg.toFixed(1)} kg</Badge>
+            <Badge>{user.heightM.toFixed(2)} m</Badge>
+            <Badge>{user.gender}</Badge>
           </div>
         </Card>
 

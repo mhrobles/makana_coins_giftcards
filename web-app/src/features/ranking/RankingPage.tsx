@@ -3,11 +3,13 @@ import Section from '../../components/ui/Section';
 import { Title, Subtitle } from '../../components/ui/Title';
 import LeaderItem from '../../components/LeaderItem';
 import { getTopLeaders } from '../../services/ranking';
+import { getUserProfile } from '../../services/user';
 
 export default function RankingPage(){
   const leaders = getTopLeaders();
-  const userPosition = 10; // derived from data sample
-  const userPoints = leaders.find((_, i) => i === userPosition - 1)?.points ?? 38;
+  const user = getUserProfile();
+  const userPosition = user.rankingPosition;
+  const userPoints = user.points;
 
   return (
     <main className="main">

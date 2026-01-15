@@ -84,32 +84,30 @@ La app usa Vite; las rutas están definidas con `react-router-dom`.
 
 ## Decisiones técnicas
 
-### Flutter
 
-- Persistencia local: `shared_preferences` para guardar estado ligero del usuario y preferencias.
-- Estructura: separación por `pages/`, `services/`, `models/`, `ui/` en [flutter_app/lib/](flutter_app/lib).
-- Datos locales: lectura de JSON de `params` (o assets) para catálogos y estado del usuario en desarrollo.
-- Multiplataforma: mismo código para Android, iOS, web y desktop; variaciones solo donde aplica.
+### Principios de Clean Code y escalabilidad
 
-### React (Vite + TS)
+Para asegurar un código escalable, mantenible y fácil de extender, se aplicaron principios de Clean Code en ambas apps:
 
-- Build rápido: Vite para DX ágil y HMR.
-- Routing: `react-router-dom` para navegación SPA.
-- Tipado: TypeScript en [web-app/src/](web-app/src) con `types/` y utilidades compartidas.
-- Configuraciones mínimas: ESLint y TS estrictos para mantener calidad sin sobrecarga.
+- **Separación de responsabilidades:** Cada archivo y clase tiene una única responsabilidad clara (SRP), evitando lógica mezclada entre UI, servicios y modelos.
+- **Nombres descriptivos:** Variables, funciones y clases usan nombres claros y autoexplicativos, facilitando la comprensión y el onboarding de nuevos desarrolladores.
+- **Modularidad:** El código está organizado en módulos independientes (`pages/`, `services/`, `models/`, `ui/`), permitiendo agregar o modificar funcionalidades sin afectar otras partes.
+- **Evitar duplicidad:** Se centralizan los datos y la lógica compartida, reutilizando servicios y modelos tanto en Flutter como en React.
+- **Simplicidad y legibilidad:** Se prioriza la claridad sobre la optimización prematura, con funciones cortas y comentarios solo donde agregan valor.
+- **Escalabilidad:** La estructura permite crecer el proyecto agregando nuevas pantallas, servicios o integraciones sin refactorizaciones mayores.
 
 ---
 
 ## Mejoras futuras
 
-- Backend real: exposiciones REST/GraphQL para reemplazar mocks de `params` y sincronizar saldo y redenciones.
+- Backend real: implementación de una base de datos real para reemplazar mocks de `params` y sincronizar saldo y redenciones.
 - Autenticación: email/OTP o social login; sesiones seguras y refresh tokens.
-- Estado avanzado: Flutter (Riverpod/Bloc); React (Context + Reducer o Zustand/Redux) para flujos complejos.
 - Observabilidad: manejo de errores centralizado, trazas y métricas (Sentry/OpenTelemetry).
-- Accesibilidad e i18n: WCAG AA y traducciones (ES/EN) con fallback.
-- Rendimiento: code-splitting en React, imágenes responsivas y caching; en Flutter, `const` widgets y memoización.
 - Pruebas y CI: unit/widget/e2e; pipelines para lint, test y build.
-
+- Creación de ventanas para las opciones adjuntas en "Prueba algo diferente" en la ventana de inicio
+- Flujo de sesiones de rutinas (al darle en el boton de empezar no sucede nada ahora)
+- Agregar lógica de obtención de puntajes
+- Dar la posibilidad de editar perfil y el tipo de plan
 ---
 
 ## Resolución de problemas

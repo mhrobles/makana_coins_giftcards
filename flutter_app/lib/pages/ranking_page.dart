@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 import '../models/leader_entry.dart';
+import '../services/user_profile.dart';
+import '../models/user_profile.dart';
 import '../ui/widgets.dart';
 
-class RankingPage extends StatelessWidget {
+class RankingPage extends StatefulWidget {
   const RankingPage({super.key});
+  @override
+  State<RankingPage> createState() => _RankingPageState();
+}
+
+class _RankingPageState extends State<RankingPage> {
+  UserProfile? user;
   static const List<LeaderEntry> top10 = [
     LeaderEntry('Usuario 1', 300),
     LeaderEntry('Usuario 2', 251),
@@ -18,6 +26,12 @@ class RankingPage extends StatelessWidget {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    getUserProfile().then((u) => setState(() => user = u));
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ListView(
       padding: const EdgeInsets.all(16),
@@ -26,23 +40,23 @@ class RankingPage extends StatelessWidget {
           gradient: const LinearGradient(
             colors: [Color(0xFF1560FF), Color(0xFF36A0FF)],
           ),
-          child: const Column(
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Tu Posición', style: TextStyle(color: Colors.white70)),
-              SizedBox(height: 8),
+              const Text('Tu Posición', style: TextStyle(color: Colors.white70)),
+              const SizedBox(height: 8),
               Text(
-                '#10',
-                style: TextStyle(
+                user != null ? '#${user!.rankingPosition}' : '',
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 28,
                   fontWeight: FontWeight.w800,
                 ),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Text(
-                '38 pts',
-                style: TextStyle(
+                user != null ? '${user!.points} pts' : '',
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 22,
                   fontWeight: FontWeight.w700,

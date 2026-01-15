@@ -1,9 +1,23 @@
 import 'package:flutter/material.dart';
 import '../ui/widgets.dart';
 import 'coins_page.dart';
+import '../services/user_profile.dart';
+import '../models/user_profile.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  UserProfile? user;
+
+  @override
+  void initState() {
+    super.initState();
+    getUserProfile().then((u) => setState(() => user = u));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,9 +26,9 @@ class HomePage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Hola Carlos',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
+          Text(
+            user != null ? 'Hola ${user!.name}' : '',
+            style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: 12),
           mkBanner('Revisa el desafío de este mes!'),

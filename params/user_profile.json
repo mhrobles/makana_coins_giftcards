@@ -1,0 +1,15 @@
+{
+  "id": "19638444-8",
+  "name": "Carlos",
+  "email": "carlos@email.com",
+  "phone": "+56991712991",
+  "weightKg": 65.0,
+  "heightM": 1.75,
+  "gender": "Masculino",
+  "joinedAt": "2025-01-10T12:00:00Z",
+  "weeklyCompliancePct": 66,
+  "zonesTreated": 7,
+  "totalMinutes": 51,
+  "points": 38,
+  "rankingPosition": 10
+}

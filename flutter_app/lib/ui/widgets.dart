@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-// Functional, reusable UI builders
 Widget mkCard({required Widget child, Gradient? gradient}) {
   return Container(
     padding: const EdgeInsets.all(16),
